@@ -5,10 +5,10 @@ This project focuses on performing Exploratory Data Analysis (EDA) on a credit c
 The goal of this phase is to clean the data, explore important features, and gain insights that will later support machine learning model development.
 
 ## Dataset
-- **Source**: [Kaggle Credit Card Fraud Detection Dataset](https://www.kaggle.com/mlg-ulb/creditcardfraud) (or specify your source)
+- **Source**: [Kaggle Credit Card Fraud Detection Dataset](https://www.kaggle.com/mlg-ulb/creditcardfraud) 
 - **Size**: 284,807 transactions
 - **Features**: 30 features (V1-V28 are PCA-transformed, Time, Amount, Class)
-- **Class Distribution**: Highly imbalanced (~0.17% fraud cases)
+- **Class Distribution**: Highly imbalanced (0.17% fraud cases)
 
 ## Project Goals
 - Understand the structure and characteristics of credit card transaction data
