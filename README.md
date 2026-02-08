@@ -54,7 +54,7 @@ The goal of this phase is to clean the data, explore important features, and gai
   - Ensemble methods
 
 ### 4. Data Preprocessing
-- Handled missing values (if any)
+- Handled missing values
 - Feature scaling for Amount and Time features
 - Split data into training and testing sets
 - Prepared data pipeline for model training
