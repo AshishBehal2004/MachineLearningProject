@@ -6,7 +6,7 @@ import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.preprocessing import StandardScaler
 
 from src.exception import CustomException
 from src.logger import logging
@@ -19,9 +19,11 @@ class DataTransformation:
     def __init__(self):
         self.data_transformation_config = DataTransformationConfig()
 
-    def get_data_transformer_obj(self):
+    def get_data_transformer_obj(self, numerical_columns):
+        '''This function is responsible got data transformation'''
         try:
-            numerical_columns = ["Time", "Amount"]
+            target_column_name = "Class"
+            num_columns = numerical_columns
 
             num_pipeline = Pipeline(
                 steps = [
@@ -29,10 +31,42 @@ class DataTransformation:
                     ("scaler", StandardScaler())
                 ]
             )
-            logging.info("Numerical columns standard scaling completed")
+            logging.info(f"Numerical columns: {num_columns}")
+
             preprocessor = ColumnTransformer(
-                ("num_pipeline", num_pipeline, numerical_columns)
+                [("num_pipeline", num_pipeline, num_columns)]
             )
             return preprocessor
+        except Exception as e:
+            raise CustomException(e, sys)
+    
+    def initiate_data_transformation(self, train_path, test_path):
+        try:
+            train_df = pd.read_csv(train_path)
+            test_df = pd.read_csv(test_path)
+
+            logging.info("Reading train and test data completed")
+            logging.info("Obtaining preprocessing object")
+
+            target_column_name = "Class"
+
+            numerical_columns = train_df.columns.drop(target_column_name)
+
+            preprocessoing_obj = self.get_data_transformer_obj(numerical_columns)
+
+            input_feature_train_df = train_df.drop(columns=[target_column_name], axis=1)
+            target_feature_train_df = train_df[target_column_name]
+
+            input_feature_test_df = test_df.drop(columns=[target_column_name], axis=1)
+            target_feature_test_df = test_df[target_column_name]
+
+            logging.info(f"Applying preprocessing object on training dataframe and testing dataframe")
+
+            input_feature_train_arr = preprocessoing_obj.fit_transform(input_feature_train_df)
+            input_feature_test_arr = preprocessoing_obj.transform(input_feature_train_df)
+
+            train_arr =
+
+           
         except:
             pass
