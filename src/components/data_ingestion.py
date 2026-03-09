@@ -8,6 +8,9 @@ from sklearn.model_selection import train_test_split
 from dataclasses import dataclass # using to automatically create boilerplate code (like __init__, __repr__, __eq__) 
 # for simple data-holding classes in order to define classes cleanly without writing repetitive code.
 
+from src.components.data_transformation import DataTransformation
+from src.components.data_transformation import DataTransformationConfig
+
 @dataclass
 class DataIngestionConfig: # This class holds the folder paths where we will save our data files
     train_data_path: str=os.path.join('artifacts',"train.csv") # where to save training data
@@ -46,4 +49,7 @@ class DataIngestion: # This class is responsible for loading and splitting the d
             raise CustomException(e, sys)
 if __name__ == "__main__": # Means run this file directly
     obj=DataIngestion() # creates DataIngestion object
-    obj.initiate_data_ingestion() # Starts the DataIngestion process
+    train_data,test_data= obj.initiate_data_ingestion() # Starts the DataIngestion process
+
+    data_transformation=DataTransformation()
+    data_transformation.initiate_data_transformation(train_data, test_data)
