@@ -5,6 +5,7 @@ import numpy as np
 import dill
 from src.exception import CustomException
 from sklearn.metrics import f1_score, roc_auc_score
+from sklearn.model_selection import RandomizedSearchCV
 
 def save_object(file_path, obj):
     try:
@@ -18,11 +19,17 @@ def save_object(file_path, obj):
         raise CustomException(e, sys)   
 
 
-def evaluate_models(X_train, y_train, X_test, y_test, models ):
+def evaluate_models(X_train, y_train, X_test, y_test, models, params ):
     report = {} #dictionary for storing each model's score
     try:
         for i in range(len(list(models))): #looping over every model in model dict.
             model = list(models.values())[i] # picks the actual model object at ith index
+
+            para = params[list(models.keys())[i]]
+            if para:
+                rs = RandomizedSearchCV(model, para, cv=2, scoring="f1", n_iter=2)
+                rs.fit(X_train,y_train)
+                model.set_params(**rs.best_params_)
 
             model.fit(X_train, y_train) # Training the model
 
@@ -38,7 +45,7 @@ def evaluate_models(X_train, y_train, X_test, y_test, models ):
 
             report[list(models.keys())[i]] = { # saving the model's name and its testscore into the report dict.
                 "f1 " : test_f1,
-                "roc_auc " :test_roc_auc_score }
+                "roc_auc" :test_roc_auc_score }
             
         return report 
     except Exception as e:

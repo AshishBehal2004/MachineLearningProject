@@ -29,6 +29,7 @@ class DataIngestion: # This class is responsible for loading and splitting the d
 
         try:
             df= pd.read_csv('notebook/data/creditcard.csv') #reading the data set
+            # df =df.sample(frac=0.2, random_state=42)
             logging.info('Read the dataset as the dataframe') #logging the message
 
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True) # creates the artifacts folder if it doesn't already exist

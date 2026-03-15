@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.ensemble import GradientBoostingClassifier #build trees sequentially, each tree corrects the mistake of previous one to detect rare fraud cases
+from sklearn.ensemble import HistGradientBoostingClassifier #build trees sequentially, each tree corrects the mistake of previous one to detect rare fraud cases
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
 
 from src.exception import CustomException
@@ -20,7 +20,7 @@ class ModelTrainerConfig:
 
 class ModelTrainer:
     def __init__(self):
-        self.model_trainer_config= ModelTrainerConfig
+        self.model_trainer_config= ModelTrainerConfig()
 
     def initiate_model_trainer(self, train_arr, test_arr):
         try:
@@ -35,19 +35,31 @@ class ModelTrainer:
             models = {
                 "LogisticRegression" : LogisticRegression(),
                 "RandomForestClassifier" : RandomForestClassifier(),
-                "GradientBoostingClassifier" : GradientBoostingClassifier(),
+                "HistGradientBoostingClassifier" : HistGradientBoostingClassifier(),
+            }
+
+            params = {
+                "LogisticRegression" : {},
+                "RandomForestClassifier" : {
+                    "n_estimators" : [100,200],
+                    "max_depth" : [3, 5, None]
+                },
+                "HistGradientBoostingClassifier" : {
+                    "max_iter" : [100,200],
+                    "max_depth" : [3, 5]
+                }
             }
 
             model_report: dict= evaluate_models(X_train = X_train,
                                                 y_train = y_train,
                                                 X_test = X_test,
                                                 y_test  = y_test,
-                                                models=models )
+                                                models=models, params=params )
             
             #best model score from dict
             best_model_score = 0
             for model_name in model_report:
-                score = model_report[model_name]["roc_auc "]
+                score = model_report[model_name]["roc_auc"]
                 if score > best_model_score:
                     best_model_score = score
                     best_model_name = model_name
@@ -69,6 +81,7 @@ class ModelTrainer:
 
             predicted= best_model.predict(X_test)
             print("Best model f1: " , f1_score(y_test, predicted))
+            print("Best model name: ", best_model_name)
 
             return best_model_score
 
