@@ -81,7 +81,7 @@ class ModelTrainer:
 
             predicted= best_model.predict(X_test)
             print("Best model f1: " , f1_score(y_test, predicted))
-            print("Best model name: ", best_model_name)
+            print("Best model name: ", best_model_name) 
 
             return best_model_score
 
