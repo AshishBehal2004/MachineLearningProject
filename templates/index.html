@@ -1,1 +1,21 @@
-<h1> Welcome to Homepage</h1>
+<html>
+<body>
+    <div class="login">
+       <h1>Credit Card Fraud Detector</h1>
+   
+      
+        <form action="/predictdata" method="post">
+            <input type="hidden" name="transaction_type" value="fraud">
+            <button type="submit">Test Fraud Transaction</button>
+        </form>
+
+        <form action="/predictdata" method="post">
+            <input type="hidden" name="transaction_type" value="normal">
+            <button type="submit">Test Normal Transaction</button>
+        </form>
+        
+    <h2>
+       THE  prediction is {{results}}
+    </h2>
+   <body>
+</html>

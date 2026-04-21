@@ -1,5 +1,5 @@
 from flask import Flask, request,render_template
-import numpy as mp
+import numpy as np
 import pandas as pd
 from src.pipeline.predict_pipeline import CustomData , PredictPipeline
 from sklearn.preprocessing import StandardScaler 
@@ -18,13 +18,13 @@ NORMAL_ROW = [0.0, -1.3598071336738, -0.0727811733098497, 2.53634673796914, 1.37
 @app.route('/') # when user visits localhost:5000/
 
 def index():
-    return render_template("index.html") #send index.html to browser
+    return render_template("home.html") #send home.html to browser
 
 @app.route('/predictdata', methods=['GET', 'POST']) # this route handles both page load and button click
 
 def predict_datapoint():
     if request.method == 'GET': # when user just visits the webpage
-        return render_template('home.html') #shows the page with buttons
+        return render_template('index.html') #shows the page with buttons
     
     else:
         transaction_type= request.form.get("transaction_type") # when user clicks a button
@@ -41,7 +41,7 @@ def predict_datapoint():
         result = pipeline.predict(pred_df) # scale + r
 
         label= "Fraud Detected" if result[0] == 1 else "Legitimate Transaction"
-        return render_template('home.html', results=label)
+        return render_template('index.html', results=label)
     
 if __name__ == "__main__":
     app.run(host= '0.0.0.0',port=5001) #starts the server
