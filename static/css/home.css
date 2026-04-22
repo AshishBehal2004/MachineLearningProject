@@ -1,0 +1,86 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+        :root {
+            --bg: #0f0e0c;
+            --surface: #171612;
+            --border: #262420;
+            --accent: #e8c170;
+            --text: #f0ece4;
+            --text-mid: #9a9285;
+            --text-dim: #4a4640;
+        }
+ 
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 4rem 2rem;
+            overflow-x: hidden;
+        }
+ 
+        .container {
+            width: 100%;
+            max-width: 640px;
+        }
+ 
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 5rem;
+            animation: fadeIn 0.8s ease both;
+        }
+ 
+        .nav-brand {
+            font-family: 'Fraunces', serif;
+            font-weight: 300;
+            font-size: 1rem;
+            color: var(--text-mid);
+        }
+ 
+        .nav-tag {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+ 
+        .hero {
+            margin-bottom: 4rem;
+            animation: fadeIn 0.8s 0.1s ease both;
+        }
+ 
+        .hero-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+ 
+        .eyebrow-line {
+            width: 32px;
+            height: 1px;
+            background: var(--accent);
+            opacity: 0.6;
+        }
+ 
+        .eyebrow-text {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            opacity: 0.8;
+        }
+ 
+        .hero-title {
+            font-family: 'Fraunces', serif;
+            font-weight: 300;
+            font-size: 3rem;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+        }

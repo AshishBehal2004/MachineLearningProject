@@ -8,11 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Credit Card Fraud — A Research Project</title>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 </head>
 <body>
     <div class="container">
-        div class="nav">
+        <div class="nav">
             <div class="nav-brand">Ashish Behal</div>
             <div class="nav-tag">ML Research Project · 2026</div>
         </div>
@@ -24,7 +24,7 @@
             </div>
             <h1 class="hero-title">When 0.17% of data<br>carries <em>all the weight</em></h1>
             <p class="hero-subtitle">
-                A deep dive into credit card fraud detection — exploring what makes this problem hard, 
+                A deep dive into credit card fraud detection, exploring what makes this problem hard, 
                 how machine learning approaches it, and what the numbers actually mean.
             </p>
         </div>
@@ -61,17 +61,17 @@
 
         <div class="callout">
             <p class="callout-text">
-                "A model that predicts every transaction as legitimate would be 99.83% accurate — 
+                "A model that predicts every transaction as legitimate would be 99.83% accurate 
                 and completely useless for catching fraud."
             </p>
-            <p class="callout-source">— Why accuracy alone is the wrong metric for imbalanced classification</p>
+            <p class="callout-source">Why accuracy alone is the wrong metric for imbalanced classification</p>
         </div>
 
         <div class="section">
             <div class="section-label">The Approach</div>
             <p class="section-text">
-                Rather than optimizing for accuracy, this model is evaluated on <strong>ROC-AUC score</strong> — 
-                a metric that measures how well the model separates fraud from legitimate transactions 
+                Rather than optimizing for accuracy, this model is evaluated on <strong>ROC-AUC score</strong> 
+                which is a metric that measures how well the model separates fraud from legitimate transactions 
                 across all possible thresholds.
                 <br><br>
                 A <strong>Random Forest classifier</strong> was trained with a custom detection 
