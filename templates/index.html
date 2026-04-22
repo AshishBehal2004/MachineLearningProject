@@ -48,7 +48,7 @@
                     <form action="/predictdata" method="post">
                         <input type="hidden" name="transaction_type" value="fraud">
                         <button type="submit" class="btn btn-fraud" style="width:100%">
-                            <span class="btn-icon">⚠</span>
+                            <span class="btn-icon"></span>
                             Test Fraud Transaction
                         </button>
                     </form>
@@ -64,7 +64,7 @@
                 {% if results %}
                     {% if results == "Fraud Detected" %}
                     <div class="result-box fraud">
-                        <div class="result-icon">🚨</div>
+                        <div class="result-icon"></div>
                         <div class="result-content">
                             <div class="result-label">Analysis Result</div>
                             <div class="result-value fraud">{{ results }}</div>

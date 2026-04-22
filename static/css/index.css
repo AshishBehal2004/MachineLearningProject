@@ -159,7 +159,7 @@
     .card-tag::before {
         content: '';
         display: block;
-        width: 20px;
+
         height: 1px;
         background: var(--accent);
     }
