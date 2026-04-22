@@ -22,7 +22,9 @@ class PredictPipeline:
 
             print("preprocessor loaded")
             data_scaled = preprocessor.transform(features) # scale input data same way training data was scaled
-            pred = model.predict(data_scaled) # feed scaled data to model and get prediction (0 or 1)
+            pred_proba = model.predict_proba(data_scaled)
+            print("Fraud probability:", pred_proba[:, 1])
+            pred = (pred_proba[:, 1] >= 0.2).astype(int)
             print("prediction done")
             return pred
         

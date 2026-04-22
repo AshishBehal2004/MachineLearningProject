@@ -39,6 +39,8 @@ def predict_datapoint():
 
         pipeline= PredictPipeline() # then creates pipleine object
         result = pipeline.predict(pred_df) # scale + r
+        print("Raw prediction result:", result)
+        print("Transaction type:", transaction_type)
 
         label= "Fraud Detected" if result[0] == 1 else "Legitimate Transaction"
         return render_template('index.html', results=label)
